@@ -1,0 +1,732 @@
+   <!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1d4ed8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Количество теплоты · 8 класс</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:#eef2f7;color:#111827;line-height:1.55;-webkit-text-size-adjust:100%}
+button{font-family:inherit;touch-action:manipulation}
+header{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(29,78,216,.35)}
+.hwrap{max-width:640px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+#hdrTitle{font-size:1.05rem;font-weight:800}
+.sub{font-size:.75rem;opacity:.85;margin-top:2px}
+.langbtn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.75);color:#fff;font-weight:800;padding:8px 16px;border-radius:999px;font-size:.95rem;cursor:pointer;flex:none}
+.scorebar{position:sticky;top:62px;z-index:40;background:#fff;max-width:640px;margin:10px auto 0;border-radius:14px;box-shadow:0 2px 8px rgba(17,24,39,.1);padding:10px 14px}
+.srow,.prow{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;font-weight:600;color:#374151}
+.big{color:#1d4ed8;font-size:1.35rem;font-weight:800}
+.pbar{height:8px;background:#e5e7eb;border-radius:999px;margin-top:8px;overflow:hidden}
+#pfill{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#16a34a);border-radius:999px;transition:width .4s}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 10px}
+.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 2px 8px rgba(17,24,39,.07);border:2px solid transparent}
+.card.done{border-color:#22c55e;background:#f6fef9}
+.card h2{font-size:1.08rem;color:#1d4ed8;margin-bottom:10px}
+.card.done h2{color:#15803d}
+.intro{font-size:.84rem;color:#6b7280;margin-bottom:10px}
+.formula{background:#eff6ff;border:2px solid #bfdbfe;color:#1e3a8a;font-size:1.5rem;font-weight:800;text-align:center;padding:14px;border-radius:12px;margin:12px 0}
+.tlist{margin:8px 0 8px 20px}
+.tlist li{margin-bottom:6px}
+.ctable{width:100%;border-collapse:collapse;margin:10px 0}
+.ctable th,.ctable td{border:1px solid #e5e7eb;padding:8px 10px;text-align:left;font-size:.92rem}
+.ctable th{background:#f9fafb}
+.tri{text-align:center;margin:12px 0 4px}
+.small{font-size:.8rem;color:#6b7280}
+.g{color:#16a34a}
+.r{color:#dc2626}
+.ptext{font-size:1rem;margin-bottom:4px}
+.blank{display:inline-block;min-width:88px;text-align:center;border:2px dashed #93c5fd;background:#eff6ff;color:#1d4ed8;font-weight:700;border-radius:8px;padding:2px 8px;margin:3px 2px;cursor:pointer}
+.blank.filled{border-style:solid;background:#dbeafe}
+.chips{text-align:center;margin:12px 0}
+.chip{display:inline-block;background:#fff;border:2px solid #93c5fd;color:#1d4ed8;font-weight:600;font-size:.92rem;padding:8px 14px;border-radius:999px;margin:4px;cursor:pointer}
+.chip.sel{background:#1d4ed8;border-color:#1d4ed8;color:#fff}
+.chip.used{opacity:.35;pointer-events:none;text-decoration:line-through}
+.locked-box{pointer-events:none;opacity:.55}
+.checkbtn{display:block;width:100%;background:#1d4ed8;color:#fff;border:none;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:10px}
+.checkbtn:active{transform:scale(.98)}
+.checkbtn:disabled{background:#22c55e;cursor:default}
+.hrow{margin-top:8px}
+.hbtn{background:#fff7ed;border:1.5px solid #fdba74;color:#c2410c;font-weight:600;font-size:.85rem;padding:8px 14px;border-radius:10px;cursor:pointer}
+.hbtn:disabled{opacity:.55;cursor:default}
+.hintbox{display:none;background:#fffbeb;border-left:4px solid #f59e0b;padding:10px 12px;border-radius:8px;font-size:.9rem;margin-top:8px;color:#78350f}
+.hintbox.show{display:block}
+.fb{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;font-weight:600;font-size:.92rem}
+.fb.show{display:block}
+.fb-ok{background:#dcfce7;color:#15803d}
+.fb-err{background:#fee2e2;color:#b91c1c}
+.mrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.mlab{font-weight:600;font-size:.9rem;flex:1}
+.msel{border:1.5px solid #d1d5db;border-radius:10px;padding:9px;font-size:.85rem;background:#fff;max-width:52%;flex:none}
+.tq{margin-bottom:16px}
+.tqtext{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:#f9fafb;border:2px solid #e5e7eb;border-radius:12px;padding:11px 13px;font-size:.95rem;margin-bottom:7px;cursor:pointer}
+.opt.sel{border-color:#1d4ed8;background:#eff6ff;font-weight:600}
+.opt.good{border-color:#22c55e;background:#f0fdf4}
+.sitem{display:flex;align-items:center;gap:10px;background:#f9fafb;border:2px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;font-size:.93rem}
+.sitem.sel{border-color:#1d4ed8;background:#eff6ff}
+.sitem.frozen{pointer-events:none}
+.num{flex:none;width:26px;height:26px;border-radius:50%;background:#1d4ed8;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.num.empty{background:#d1d5db}
+#calcIn{width:100%;border:2px solid #d1d5db;border-radius:12px;padding:13px;font-size:1.05rem;margin-top:6px}
+#calcIn:focus{outline:none;border-color:#1d4ed8}
+.footer-warn{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:12px;padding:13px 16px;font-size:.85rem;font-weight:600;text-align:center;margin-bottom:30px}
+.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.6);z-index:100;align-items:center;justify-content:center;padding:20px}
+.overlay.show{display:flex}
+.obox{background:#fff;border-radius:20px;max-width:420px;width:100%;padding:28px 24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.emoji{font-size:3.2rem}
+.fscore{font-size:3.2rem;font-weight:800;color:#1d4ed8;margin:10px 0}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.shake{animation:shake .45s}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div>
+      <div id="hdrTitle"></div>
+      <div class="sub" id="hdrSub"></div>
+    </div>
+    <button id="langBtn" class="langbtn" onclick="switchLang()"></button>
+  </div>
+</header>
+
+<div class="scorebar">
+  <div class="srow"><span id="scoreLbl"></span><span class="big"><span id="scoreVal">100</span>%</span></div>
+  <div class="prow" style="margin-top:6px"><span id="progLbl"></span><span id="progVal" style="color:#16a34a;font-weight:800"></span></div>
+  <div class="pbar"><div id="pfill"></div></div>
+</div>
+
+<div class="wrap">
+
+  <div class="card" id="theoryCard">
+    <h2 id="theoryTitle"></h2>
+    <div id="theoryBox"></div>
+    <div class="hrow"><button class="hbtn" id="hint-theory" onclick="useHint('theory')"></button></div>
+    <div class="hintbox" id="hintbox-theory"></div>
+  </div>
+
+  <div class="card" id="puzzleCard">
+    <h2 id="puzzleTitle"></h2>
+    <p class="intro" id="puzzleIntro"></p>
+    <p class="ptext" id="puzzleText"></p>
+    <div class="chips" id="puzzleWords"></div>
+    <button class="checkbtn" id="check-puzzle" onclick="checkPuzzle()"></button>
+    <div class="fb" id="fb-puzzle"></div>
+    <div class="hrow"><button class="hbtn" id="hint-puzzle" onclick="useHint('puzzle')"></button></div>
+    <div class="hintbox" id="hintbox-puzzle"></div>
+  </div>
+
+  <div class="card" id="matchCard">
+    <h2 id="matchTitle"></h2>
+    <p class="intro" id="matchIntro"></p>
+    <div id="matchBox"></div>
+    <button class="checkbtn" id="check-match" onclick="checkMatch()"></button>
+    <div class="fb" id="fb-match"></div>
+    <div class="hrow"><button class="hbtn" id="hint-match" onclick="useHint('match')"></button></div>
+    <div class="hintbox" id="hintbox-match"></div>
+  </div>
+
+  <div class="card" id="testCard">
+    <h2 id="testTitle"></h2>
+    <div id="testBox" style="margin-top:6px"></div>
+    <button class="checkbtn" id="check-test" onclick="checkTest()"></button>
+    <div class="fb" id="fb-test"></div>
+    <div class="hrow"><button class="hbtn" id="hint-test" onclick="useHint('test')"></button></div>
+    <div class="hintbox" id="hintbox-test"></div>
+  </div>
+
+  <div class="card" id="schemeCard">
+    <h2 id="schemeTitle"></h2>
+    <p class="intro" id="schemeIntro"></p>
+    <div id="schemeBox"></div>
+    <button class="checkbtn" id="check-scheme" onclick="checkScheme()"></button>
+    <div class="fb" id="fb-scheme"></div>
+    <div class="hrow"><button class="hbtn" id="hint-scheme" onclick="useHint('scheme')"></button></div>
+    <div class="hintbox" id="hintbox-scheme"></div>
+  </div>
+
+  <div class="card" id="calcCard">
+    <h2 id="calcTitle"></h2>
+    <p id="calcText"></p>
+    <input id="calcIn" type="number" inputmode="numeric" oninput="calcInput(this.value)">
+    <button class="checkbtn" id="check-calc" onclick="checkCalc()"></button>
+    <div class="fb" id="fb-calc"></div>
+    <div class="hrow"><button class="hbtn" id="hint-calc" onclick="useHint('calc')"></button></div>
+    <div class="hintbox" id="hintbox-calc"></div>
+  </div>
+
+  <div class="footer-warn" id="noReset"></div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="obox">
+    <div class="emoji">🎉</div>
+    <h1 id="finalTitle" style="color:#1d4ed8;font-size:1.4rem;margin:8px 0"></h1>
+    <p id="finalLbl" style="color:#374151;font-weight:600"></p>
+    <div class="fscore"><span id="finalScore">0</span>%</div>
+    <p id="finalMsg" class="small" style="margin-bottom:14px"></p>
+    <button class="checkbtn" id="overlayClose" onclick="closeOverlay()"></button>
+  </div>
+</div>
+
+<noscript style="display:block;padding:20px;text-align:center;font-weight:700">Включите JavaScript / JavaScript-ты қосыңыз</noscript>
+
+<script>
+function el(id){return document.getElementById(id);}
+
+var TRI_SVG = "<div class='tri'><svg viewBox='0 0 220 130' width='200' height='118'>"
+ +"<polygon points='110,8 210,122 10,122' fill='#eff6ff' stroke='#2563eb' stroke-width='3'/>"
+ +"<line x1='42' y1='78' x2='178' y2='78' stroke='#2563eb' stroke-width='3'/>"
+ +"<text x='110' y='62' text-anchor='middle' font-size='26' font-weight='bold' fill='#1e3a8a'>Q</text>"
+ +"<text x='110' y='108' text-anchor='middle' font-size='17' font-weight='bold' fill='#1e3a8a'>c · m · Δt</text>"
+ +"</svg></div>";
+
+var T = {
+  ru: {
+    appTitle: "Количество теплоты",
+    appSub: "Физика · 8 класс · Удельная теплоёмкость вещества",
+    langBtn: "ҚАЗ",
+    scoreLbl: "Балл:",
+    progLbl: "Задания:",
+    theoryTitle: "📚 Краткая теория",
+    theoryHTML:
+      "<p><b>Количество теплоты (Q)</b> — энергия, которую тело получает или отдаёт при теплопередаче. Единица — <b>джоуль (Дж)</b>.</p>"
+      +"<div class='formula'>Q = c · m · Δt</div>"
+      +"<ul class='tlist'>"
+      +"<li><b>c</b> — удельная теплоёмкость: количество теплоты, необходимое для нагревания 1 кг вещества на 1 °C. Единица — Дж/(кг·°C).</li>"
+      +"<li><b>m</b> — масса тела, кг.</li>"
+      +"<li><b>Δt = t₂ − t₁</b> — изменение температуры, °C.</li>"
+      +"</ul>"
+      +"<table class='ctable'><tr><th>Вещество</th><th>c, Дж/(кг·°C)</th></tr><tr><td>Вода</td><td>4200</td></tr><tr><td>Алюминий</td><td>920</td></tr><tr><td>Железо</td><td>460</td></tr></table>"
+      +"<p>При нагревании тело <b class='g'>получает</b> теплоту, при охлаждении — <b class='r'>отдаёт</b>.</p>"
+      +TRI_SVG
+      +"<p class='small'>Треугольник-подсказка: закрой Q — останется c·m·Δt (умножай).</p>",
+    puzzleTitle: "🧩 Конспект-пазл",
+    puzzleIntro: "Нажми на слово, затем на пропуск. Нажатие на заполненный пропуск убирает слово.",
+    puzzleText: "Количество теплоты обозначают буквой {0}. Её вычисляют по формуле {1}. Удельная теплоёмкость воды равна {2} Дж/(кг·°C). При нагревании тело {3} теплоту.",
+    puzzleWords: ["Q","Q = c·m·Δt","4200","получает","отдаёт","460","m = ρ·V","Δt"],
+    puzzleCorrect: [0,1,2,3],
+    matchTitle: "🔗 Соответствие",
+    matchIntro: "Для каждой величины выбери обозначение и единицу измерения:",
+    matchItems: ["Количество теплоты","Удельная теплоёмкость","Масса","Изменение температуры"],
+    matchOptions: ["Q, Дж","c, Дж/(кг·°C)","m, кг","Δt, °C","v, м/с","ρ, кг/м³"],
+    matchCorrect: [0,1,2,3],
+    testTitle: "📝 Тест",
+    testQ: [
+      {q:"Какая формула используется для расчёта количества теплоты?", o:["Q = c·m·Δt","Q = m·g·h","Q = F·s","Q = m / V"], a:0},
+      {q:"Удельная теплоёмкость воды равна:", o:["460 Дж/(кг·°C)","4200 Дж/(кг·°C)","920 Дж/(кг·°C)","2100 Дж/(кг·°C)"], a:1},
+      {q:"При охлаждении тело:", o:["получает теплоту","отдаёт теплоту","не обменивается теплотой","увеличивает массу"], a:1},
+      {q:"Единица количества теплоты:", o:["ньютон (Н)","килограмм (кг)","джоуль (Дж)","ватт (Вт)"], a:2}
+    ],
+    schemeTitle: "🏗️ Собрать схему решения",
+    schemeIntro: "Нажимай на шаги по порядку — от первого до последнего:",
+    schemeSteps: ["Прочитать условие задачи","Записать данные: m, t₁, t₂, c","Найти Δt = t₂ − t₁","Подставить в Q = c·m·Δt и вычислить","Записать ответ"],
+    calcTitle: "🔢 Реши задачу",
+    calcText: "Какое количество теплоты нужно, чтобы нагреть 2 кг воды от 20 °C до 30 °C? Удельная теплоёмкость воды c = 4200 Дж/(кг·°C). Ответ запиши числом в джоулях.",
+    calcPlaceholder: "Введи число, например 12500",
+    calcAnswer: 84000,
+    checkBtn: "Проверить",
+    hintBtn: "💡 Подсказка (−5%)",
+    msgCorrect: "✅ Верно! Задание засчитано.",
+    msgWrong: "❌ Неверно. Попробуй ещё раз (−5%).",
+    msgEmpty: "⚠️ Сначала выполни задание полностью.",
+    matchPartial: "❌ Верно {n} из 4 пар. Исправь ошибки (−5%).",
+    testPartial: "❌ Верных ответов: {n} из 4. Исправь ошибки (−5%).",
+    doneMark: "выполнено ✓",
+    theoryHint: "Q = c·m·Δt. Теплоёмкость воды (4200) — самая большая из таблицы: вода медленно нагревается и медленно остывает.",
+    puzzleHint: "Первый пропуск — буква Q, второй — формула Q = c·m·Δt, третий — 4200, четвёртый — «получает».",
+    matchHint: "Q — Дж; c — Дж/(кг·°C); m — кг; Δt — °C.",
+    testHint: "Ответы: 1) Q = c·m·Δt; 2) 4200; 3) отдаёт; 4) джоуль (Дж).",
+    schemeHint: "Порядок: условие → данные (m, t₁, t₂, c) → Δt → подстановка в формулу → ответ.",
+    calcHint: "Δt = 30 − 20 = 10 °C. Q = 4200 · 2 · 10 = 84 000 Дж.",
+    noReset: "🔒 Сброс результатов не предусмотрен — прогресс и балл сохраняются автоматически.",
+    finalTitle: "🎉 Все задания выполнены!",
+    finalLbl: "Твой итоговый результат",
+    finalMsg: "Результат сохранён и не может быть сброшен.",
+    closeBtn: "Просмотреть задания"
+  },
+  kz: {
+    appTitle: "Жылу мөлшері",
+    appSub: "Физика · 8 сынып · Заттың меншікті жылу сыйымдылығы",
+    langBtn: "РУС",
+    scoreLbl: "Ұпай:",
+    progLbl: "Тапсырмалар:",
+    theoryTitle: "📚 Қысқаша теория",
+    theoryHTML:
+      "<p><b>Жылу мөлшері (Q)</b> — жылу алмасу кезінде дене алатын немесе беретін энергия. Өлшем бірлігі — <b>джоуль (Дж)</b>.</p>"
+      +"<div class='formula'>Q = c · m · Δt</div>"
+      +"<ul class='tlist'>"
+      +"<li><b>c</b> — меншікті жылу сыйымдылығы: 1 кг затты 1 °C-қа қыздыруға қажетті жылу мөлшері. Бірлігі — Дж/(кг·°C).</li>"
+      +"<li><b>m</b> — дене массасы, кг.</li>"
+      +"<li><b>Δt = t₂ − t₁</b> — температура өзгерісі, °C.</li>"
+      +"</ul>"
+      +"<table class='ctable'><tr><th>Зат</th><th>c, Дж/(кг·°C)</th></tr><tr><td>Су</td><td>4200</td></tr><tr><td>Алюминий</td><td>920</td></tr><tr><td>Темір</td><td>460</td></tr></table>"
+      +"<p>Қыздырғанда дене жылу <b class='g'>алады</b>, суытқанда — <b class='r'>береді</b>.</p>"
+      +TRI_SVG
+      +"<p class='small'>Үшбұрыш-кеңес: Q-ды жапсаң — c·m·Δt қалады (көбейт).</p>",
+    puzzleTitle: "🧩 Конспект-пазл",
+    puzzleIntro: "Алдымен сөзді, содан кейін бос орынды бас. Толтырылған бос орынды басу сөзді қайтарады.",
+    puzzleText: "Жылу мөлшерін {0} әрпімен белгілейді. Оны {1} формуласымен есептейді. Судың меншікті жылу сыйымдылығы {2} Дж/(кг·°C) тең. Қыздырғанда дене жылу {3}.",
+    puzzleWords: ["Q","Q = c·m·Δt","4200","алады","береді","460","m = ρ·V","Δt"],
+    puzzleCorrect: [0,1,2,3],
+    matchTitle: "🔗 Сәйкестендіру",
+    matchIntro: "Әр шамаға белгіленуін және өлшем бірлігін таңда:",
+    matchItems: ["Жылу мөлшері","Меншікті жылу сыйымдылығы","Масса","Температура өзгерісі"],
+    matchOptions: ["Q, Дж","c, Дж/(кг·°C)","m, кг","Δt, °C","v, м/с","ρ, кг/м³"],
+    matchCorrect: [0,1,2,3],
+    testTitle: "📝 Тест",
+    testQ: [
+      {q:"Жылу мөлшерін есептеу формуласы:", o:["Q = c·m·Δt","Q = m·g·h","Q = F·s","Q = m / V"], a:0},
+      {q:"Судың меншікті жылу сыйымдылығы:", o:["460 Дж/(кг·°C)","4200 Дж/(кг·°C)","920 Дж/(кг·°C)","2100 Дж/(кг·°C)"], a:1},
+      {q:"Суытқанда дене:", o:["жылу алады","жылу береді","жылу алмаспайды","массасы артады"], a:1},
+      {q:"Жылу мөлшерінің бірлігі:", o:["ньютон (Н)","килограмм (кг)","джоуль (Дж)","ватт (Вт)"], a:2}
+    ],
+    schemeTitle: "🏗️ Шешу схемасын құрастыр",
+    schemeIntro: "Қадамдарды ретімен бас — біріншіден соңғыға дейін:",
+    schemeSteps: ["Есептің шартын оқу","Деректерді жазу: m, t₁, t₂, c","Δt = t₂ − t₁ табу","Q = c·m·Δt формуласына қою және есептеу","Жауапты жазу"],
+    calcTitle: "🔢 Есепті шығар",
+    calcText: "2 кг суды 20 °C-тан 30 °C-қа дейін қыздыру үшін қанша жылу мөлшері қажет? Судың меншікті жылу сыйымдылығы c = 4200 Дж/(кг·°C). Жауапты джоульмен сан түрінде жаз.",
+    calcPlaceholder: "Сан енгіз, мысалы 12500",
+    calcAnswer: 84000,
+    checkBtn: "Тексеру",
+    hintBtn: "💡 Кеңес (−5%)",
+    msgCorrect: "✅ Дұрыс! Тапсырма қабылданды.",
+    msgWrong: "❌ Қате. Қайта көріп көр (−5%).",
+    msgEmpty: "⚠️ Алдымен тапсырманы толық орында.",
+    matchPartial: "❌ {n}/4 жұп дұрыс. Қателерді түзет (−5%).",
+    testPartial: "❌ Дұрыс жауаптар: {n}/4. Қателерді түзет (−5%).",
+    doneMark: "орындалды ✓",
+    theoryHint: "Q = c·m·Δt. Судың жылу сыйымдылығы (4200) — кестедегі ең үлкені: су баяу қызады және баяу суиды.",
+    puzzleHint: "Бірінші бос орын — Q әрпі, екінші — Q = c·m·Δt формуласы, үшінші — 4200, төртінші — «алады».",
+    matchHint: "Q — Дж; c — Дж/(кг·°C); m — кг; Δt — °C.",
+    testHint: "Жауаптар: 1) Q = c·m·Δt; 2) 4200; 3) береді; 4) джоуль (Дж).",
+    schemeHint: "Реті: шарт → деректер (m, t₁, t₂, c) → Δt → формулаға қою → жауап.",
+    calcHint: "Δt = 30 − 20 = 10 °C. Q = 4200 · 2 · 10 = 84 000 Дж.",
+    noReset: "🔒 Нәтижелерді қалпына келтіру қарастырылмаған — прогресс пен ұпай автоматты сақталады.",
+    finalTitle: "🎉 Барлық тапсырма орындалды!",
+    finalLbl: "Қорытынды нәтижең",
+    finalMsg: "Нәтиже сақталды және оны қалпына келтіру мүмкін емес.",
+    closeBtn: "Тапсырмаларды қарау"
+  }
+};
+
+var LS_KEY = "heat8_app_v4";
+var S = {
+  lang: "ru",
+  score: 100,
+  hints: {theory:false,puzzle:false,match:false,test:false,scheme:false,calc:false},
+  done: {puzzle:false,match:false,test:false,scheme:false,calc:false},
+  puzzleAns: [null,null,null,null],
+  matchAns: {},
+  testAns: {},
+  schemeDisp: null,
+  schemeOrder: [],
+  matchDisp: null,
+  testDisp: null,
+  calcAns: "",
+  allDone: false
+};
+var selWord = null;
+
+function load(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      var o = JSON.parse(raw);
+      for(var k in o){ if(o.hasOwnProperty(k)) S[k]=o[k]; }
+    }
+  }catch(e){}
+}
+function save(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){}
+}
+function t(){ return T[S.lang]; }
+
+function shuffle(a){
+  a = a.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j = Math.floor(Math.random()*(i+1));
+    var tmp=a[i]; a[i]=a[j]; a[j]=tmp;
+  }
+  return a;
+}
+function shuffleIdx(n){
+  var a=[]; for(var i=0;i<n;i++) a.push(i);
+  return shuffle(a);
+}
+
+function penalty(){
+  S.score = Math.max(0, S.score-5);
+  save();
+}
+function setFb(sec,ok,text){
+  var f = el('fb-'+sec);
+  f.className = 'fb show ' + (ok?'fb-ok':'fb-err');
+  f.textContent = text;
+}
+function shakeCard(id){
+  var c = el(id);
+  c.classList.remove('shake');
+  void c.offsetWidth;
+  c.classList.add('shake');
+}
+
+function useHint(sec){
+  if(S.hints[sec]) return;
+  S.hints[sec] = true;
+  penalty();
+  renderAll();
+}
+
+function switchLang(){
+  S.lang = (S.lang==='ru') ? 'kz' : 'ru';
+  save();
+  var fbs = document.querySelectorAll('.fb');
+  for(var i=0;i<fbs.length;i++){ fbs[i].className='fb'; fbs[i].textContent=''; }
+  renderAll();
+}
+
+function renderHint(sec){
+  var L = t();
+  var btn = el('hint-'+sec), box = el('hintbox-'+sec);
+  var used = !!S.hints[sec];
+  btn.textContent = used ? '💡 ✓' : L.hintBtn;
+  btn.disabled = used || !!S.done[sec];
+  box.textContent = L[sec+'Hint'];
+  box.className = 'hintbox' + (used ? ' show' : '');
+}
+
+function renderPuzzleText(){
+  var L = t();
+  var html = L.puzzleText.replace(/\{(\d+)\}/g, function(m,d){
+    var i = parseInt(d,10);
+    var w = S.puzzleAns[i];
+    var filled = (w!==null && w!==undefined);
+    return "<span class='blank"+(filled?' filled':'')+"' onclick='blankClick("+i+")'>"+(filled?L.puzzleWords[w]:'•••')+"</span>";
+  });
+  el('puzzleText').innerHTML = html;
+}
+
+function renderPuzzleWords(){
+  var L = t();
+  var box = el('puzzleWords');
+  box.innerHTML = '';
+  for(var i=0;i<L.puzzleWords.length;i++){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (S.puzzleAns.indexOf(i)>-1?' used':'') + (selWord===i?' sel':'');
+    b.textContent = L.puzzleWords[i];
+    b.setAttribute('data-i', i);
+    b.onclick = function(){ wordClick(parseInt(this.getAttribute('data-i'),10)); };
+    box.appendChild(b);
+  }
+  if(S.done.puzzle) box.classList.add('locked-box'); else box.classList.remove('locked-box');
+}
+
+function wordClick(i){
+  if(S.done.puzzle) return;
+  if(S.puzzleAns.indexOf(i) > -1) return;
+  selWord = (selWord===i) ? null : i;
+  renderPuzzleWords();
+}
+
+function blankClick(i){
+  if(S.done.puzzle) return;
+  var cur = S.puzzleAns[i];
+  if(selWord!==null){
+    S.puzzleAns[i] = selWord;
+    selWord = null;
+  } else if(cur!==null && cur!==undefined){
+    S.puzzleAns[i] = null;
+  } else {
+    return;
+  }
+  save();
+  renderPuzzleText();
+  renderPuzzleWords();
+}
+
+function checkPuzzle(){
+  if(S.done.puzzle) return;
+  var L = t(), i;
+  for(i=0;i<4;i++){
+    if(S.puzzleAns[i]===null || S.puzzleAns[i]===undefined){ setFb('puzzle',0,L.msgEmpty); return; }
+  }
+  var ok = true;
+  for(i=0;i<4;i++){ if(S.puzzleAns[i]!==L.puzzleCorrect[i]) ok=false; }
+  if(ok){
+    S.done.puzzle = true; save(); renderAll();
+    setFb('puzzle',1,L.msgCorrect); checkAll();
+  } else {
+    penalty(); renderAll();
+    setFb('puzzle',0,L.msgWrong); shakeCard('puzzleCard');
+  }
+}
+
+function renderMatch(){
+  var L = t();
+  var box = el('matchBox');
+  box.innerHTML = '';
+  for(var i=0;i<L.matchItems.length;i++){
+    var row = document.createElement('div');
+    row.className = 'mrow';
+    var lab = document.createElement('span');
+    lab.className = 'mlab';
+    lab.textContent = L.matchItems[i];
+    var sel = document.createElement('select');
+    sel.className = 'msel';
+    var ph = document.createElement('option');
+    ph.value = ''; ph.textContent = '— ? —';
+    sel.appendChild(ph);
+    for(var k=0;k<S.matchDisp.length;k++){
+      var oi = S.matchDisp[k];
+      var op = document.createElement('option');
+      op.value = String(oi);
+      op.textContent = L.matchOptions[oi];
+      sel.appendChild(op);
+    }
+    if(S.matchAns[i]!==undefined && S.matchAns[i]!=='') sel.value = String(S.matchAns[i]);
+    sel.setAttribute('data-i', i);
+    sel.onchange = function(){ S.matchAns[parseInt(this.getAttribute('data-i'),10)] = this.value; save(); };
+    if(S.done.match) sel.disabled = true;
+    row.appendChild(lab); row.appendChild(sel);
+    box.appendChild(row);
+  }
+}
+
+function checkMatch(){
+  if(S.done.match) return;
+  var L = t(), i;
+  for(i=0;i<L.matchItems.length;i++){
+    if(S.matchAns[i]===undefined || S.matchAns[i]===''){ setFb('match',0,L.msgEmpty); return; }
+  }
+  var cnt = 0;
+  for(i=0;i<L.matchItems.length;i++){
+    if(String(S.matchAns[i]) === String(L.matchCorrect[i])) cnt++;
+  }
+  if(cnt === L.matchItems.length){
+    S.done.match = true; save(); renderAll();
+    setFb('match',1,L.msgCorrect); checkAll();
+  } else {
+    penalty(); renderAll();
+    setFb('match',0,L.matchPartial.replace('{n}',cnt)); shakeCard('matchCard');
+  }
+}
+
+function renderTest(){
+  var L = t();
+  var box = el('testBox');
+  box.innerHTML = '';
+  for(var i=0;i<L.testQ.length;i++){
+    var w = document.createElement('div');
+    w.className = 'tq';
+    var p = document.createElement('p');
+    p.className = 'tqtext';
+    p.textContent = (i+1) + '. ' + L.testQ[i].q;
+    w.appendChild(p);
+    for(var k=0;k<S.testDisp[i].length;k++){
+      var oi = S.testDisp[i][k];
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.textContent = L.testQ[i].o[oi];
+      if(S.testAns[i] === oi) b.classList.add('sel');
+      if(S.done.test && L.testQ[i].a === oi) b.classList.add('good');
+      b.setAttribute('data-q', i);
+      b.setAttribute('data-o', oi);
+      b.onclick = function(){
+        if(S.done.test) return;
+        S.testAns[parseInt(this.getAttribute('data-q'),10)] = parseInt(this.getAttribute('data-o'),10);
+        save(); renderTest();
+      };
+      w.appendChild(b);
+    }
+    box.appendChild(w);
+  }
+  if(S.done.test) box.classList.add('locked-box'); else box.classList.remove('locked-box');
+}
+
+function checkTest(){
+  if(S.done.test) return;
+  var L = t(), i, cnt = 0, answered = 0;
+  for(i=0;i<L.testQ.length;i++){
+    if(S.testAns[i]===undefined){ setFb('test',0,L.msgEmpty); return; }
+    answered++;
+    if(S.testAns[i] === L.testQ[i].a) cnt++;
+  }
+  if(cnt === L.testQ.length){
+    S.done.test = true; save(); renderAll();
+    setFb('test',1,L.msgCorrect); checkAll();
+  } else {
+    penalty(); renderAll();
+    setFb('test',0,L.testPartial.replace('{n}',cnt)); shakeCard('testCard');
+  }
+}
+
+function renderScheme(){
+  var L = t();
+  var box = el('schemeBox');
+  box.innerHTML = '';
+  for(var k=0;k<S.schemeDisp.length;k++){
+    var idx = S.schemeDisp[k];
+    var d = document.createElement('div');
+    d.className = 'sitem';
+    var pos = S.schemeOrder.indexOf(idx);
+    if(pos > -1){
+      d.classList.add('sel');
+      d.innerHTML = "<span class='num'>"+(pos+1)+"</span><span>"+L.schemeSteps[idx]+"</span>";
+    } else {
+      d.innerHTML = "<span class='num empty'>?</span><span>"+L.schemeSteps[idx]+"</span>";
+    }
+    if(S.done.scheme) d.classList.add('frozen');
+    d.setAttribute('data-i', idx);
+    d.onclick = function(){
+      if(S.done.scheme) return;
+      var id = parseInt(this.getAttribute('data-i'),10);
+      var p = S.schemeOrder.indexOf(id);
+      if(p > -1) S.schemeOrder.splice(p,1); else S.schemeOrder.push(id);
+      save(); renderScheme();
+    };
+    box.appendChild(d);
+  }
+}
+
+function checkScheme(){
+  if(S.done.scheme) return;
+  var L = t();
+  if(S.schemeOrder.length < L.schemeSteps.length){ setFb('scheme',0,L.msgEmpty); return; }
+  var ok = true;
+  for(var i=0;i<S.schemeOrder.length;i++){ if(S.schemeOrder[i]!==i) ok=false; }
+  if(ok){
+    S.done.scheme = true; save(); renderAll();
+    setFb('scheme',1,L.msgCorrect); checkAll();
+  } else {
+    penalty();
+    S.schemeOrder = [];
+    save(); renderAll();
+    setFb('scheme',0,L.msgWrong); shakeCard('schemeCard');
+  }
+}
+
+function calcInput(v){
+  S.calcAns = v;
+  save();
+}
+
+function checkCalc(){
+  if(S.done.calc) return;
+  var L = t();
+  var v = parseFloat(String(S.calcAns).replace(',','.'));
+  if(isNaN(v)){ setFb('calc',0,L.msgEmpty); return; }
+  if(Math.abs(v - L.calcAnswer) < 1){
+    S.done.calc = true; save(); renderAll();
+    setFb('calc',1,L.msgCorrect); checkAll();
+  } else {
+    penalty(); renderAll();
+    setFb('calc',0,L.msgWrong); shakeCard('calcCard');
+  }
+}
+
+function checkAll(){
+  var d = S.done;
+  if(d.puzzle && d.match && d.test && d.scheme && d.calc && !S.allDone){
+    S.allDone = true;
+    save();
+    showOverlay();
+  }
+}
+function showOverlay(){
+  el('finalScore').textContent = S.score;
+  el('overlay').classList.add('show');
+}
+function closeOverlay(){
+  el('overlay').classList.remove('show');
+}
+
+function renderAll(){
+  var L = t();
+  document.documentElement.lang = S.lang;
+  el('hdrTitle').textContent = L.appTitle;
+  el('hdrSub').textContent = L.appSub;
+  el('langBtn').textContent = L.langBtn;
+  el('scoreLbl').textContent = L.scoreLbl;
+  el('scoreVal').textContent = S.score;
+  el('progLbl').textContent = L.progLbl;
+  var n = (S.done.puzzle?1:0)+(S.done.match?1:0)+(S.done.test?1:0)+(S.done.scheme?1:0)+(S.done.calc?1:0);
+  el('progVal').textContent = n + '/5';
+  el('pfill').style.width = (n/5*100) + '%';
+
+  el('theoryTitle').textContent = L.theoryTitle;
+  el('theoryBox').innerHTML = L.theoryHTML;
+  renderHint('theory');
+
+  el('puzzleTitle').textContent = L.puzzleTitle + (S.done.puzzle ? ' · ' + L.doneMark : '');
+  el('puzzleIntro').textContent = L.puzzleIntro;
+  renderPuzzleText();
+  renderPuzzleWords();
+  el('check-puzzle').textContent = S.done.puzzle ? '✅' : L.checkBtn;
+  el('check-puzzle').disabled = S.done.puzzle;
+  renderHint('puzzle');
+  el('puzzleCard').className = 'card' + (S.done.puzzle ? ' done' : '');
+
+  el('matchTitle').textContent = L.matchTitle + (S.done.match ? ' · ' + L.doneMark : '');
+  el('matchIntro').textContent = L.matchIntro;
+  renderMatch();
+  el('check-match').textContent = S.done.match ? '✅' : L.checkBtn;
+  el('check-match').disabled = S.done.match;
+  renderHint('match');
+  el('matchCard').className = 'card' + (S.done.match ? ' done' : '');
+
+  el('testTitle').textContent = L.testTitle + (S.done.test ? ' · ' + L.doneMark : '');
+  renderTest();
+  el('check-test').textContent = S.done.test ? '✅' : L.checkBtn;
+  el('check-test').disabled = S.done.test;
+  renderHint('test');
+  el('testCard').className = 'card' + (S.done.test ? ' done' : '');
+
+  el('schemeTitle').textContent = L.schemeTitle + (S.done.scheme ? ' · ' + L.doneMark : '');
+  el('schemeIntro').textContent = L.schemeIntro;
+  renderScheme();
+  el('check-scheme').textContent = S.done.scheme ? '✅' : L.checkBtn;
+  el('check-scheme').disabled = S.done.scheme;
+  renderHint('scheme');
+  el('schemeCard').className = 'card' + (S.done.scheme ? ' done' : '');
+
+  el('calcTitle').textContent = L.calcTitle + (S.done.calc ? ' · ' + L.doneMark : '');
+  el('calcText').textContent = L.calcText;
+  el('calcIn').placeholder = L.calcPlaceholder;
+  el('calcIn').value = S.calcAns;
+  el('calcIn').disabled = S.done.calc;
+  el('check-calc').textContent = S.done.calc ? '✅' : L.checkBtn;
+  el('check-calc').disabled = S.done.calc;
+  renderHint('calc');
+  el('calcCard').className = 'card' + (S.done.calc ? ' done' : '');
+
+  el('noReset').textContent = L.noReset;
+  el('finalTitle').textContent = L.finalTitle;
+  el('finalLbl').textContent = L.finalLbl;
+  el('finalScore').textContent = S.score;
+  el('finalMsg').textContent = L.finalMsg + ' ' + L.noReset;
+  el('overlayClose').textContent = L.closeBtn;
+}
+
+load();
+if(!S.schemeDisp || S.schemeDisp.length !== 5){
+  var sd = shuffleIdx(5);
+  if(sd[0]===0 && sd[1]===1 && sd[2]===2 && sd[3]===3 && sd[4]===4) sd = [2,0,4,1,3];
+  S.schemeDisp = sd;
+  save();
+}
+if(!S.matchDisp || S.matchDisp.length !== 6){ S.matchDisp = shuffleIdx(6); save(); }
+if(!S.testDisp || S.testDisp.length !== 4){ S.testDisp = [shuffleIdx(4),shuffleIdx(4),shuffleIdx(4),shuffleIdx(4)]; save(); }
+
+renderAll();
+if(S.allDone) showOverlay();
+</script>
+</body>
+</html>
+
